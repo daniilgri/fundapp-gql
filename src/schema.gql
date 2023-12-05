@@ -1,0 +1,14 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Project {
+  id: Float!
+  name: String!
+  approved: Boolean!
+  tags: [String!]!
+}
+
+type Query {
+  projects: [Project!]!
+}
