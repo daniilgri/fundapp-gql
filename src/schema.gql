@@ -2,13 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Tag {
+  id: ID!
+  name: String!
+  projects: [Project!]!
+}
+
 """Project model"""
 type Project {
   """unique id of the project"""
   id: ID!
   name: String!
   approved: Boolean!
-  tags: [String!]!
+  tags: [Tag!]!
 }
 
 type Query {

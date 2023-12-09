@@ -65,7 +65,7 @@ export class ProjectsService {
     return this.projectsRepository.save(updatedProject);
   }
 
-  async remove(id: number) {
+  async remove(id: number): Promise<Project> {
     const project = await this.get(id);
 
     return this.projectsRepository.remove(project);

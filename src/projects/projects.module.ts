@@ -2,12 +2,19 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Project } from './entities/project.entity';
+import { ProjectTagsResolver } from './project-tags/project-tags.resolver';
+import { ProjectTagsService } from './project-tags/project-tags.service';
 import { ProjectsResolver } from './projects.resolver';
 import { ProjectsService } from './projects.service';
 import { Tag } from '../tags/entities/tag.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Project, Tag])],
-  providers: [ProjectsResolver, ProjectsService],
+  providers: [
+    ProjectsResolver,
+    ProjectsService,
+    ProjectTagsResolver,
+    ProjectTagsService,
+  ],
 })
 export class ProjectsModule {}
