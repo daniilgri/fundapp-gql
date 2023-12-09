@@ -8,6 +8,8 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CommonModule } from './common/common.module';
+import { Concept } from './concept/entities/concept.entity';
+import { IdeasResolver } from './ideas/ideas.resolver';
 import { ProjectsModule } from './projects/projects.module';
 import { configValidationSchema } from './schemas/config.schema';
 
@@ -36,12 +38,13 @@ import { configValidationSchema } from './schemas/config.schema';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       buildSchemaOptions: {
         numberScalarMode: 'integer',
+        orphanedTypes: [Concept],
       },
     }),
     ProjectsModule,
     CommonModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, IdeasResolver],
 })
 export class AppModule {}

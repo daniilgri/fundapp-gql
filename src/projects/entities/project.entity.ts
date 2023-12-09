@@ -8,11 +8,12 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
+import { Idea } from '../../common/interfaces/idea.interface';
 import { Tag } from '../../tags/entities/tag.entity';
 
 @Entity()
-@ObjectType({ description: 'Project model' })
-export class Project {
+@ObjectType({ implements: () => Idea, description: 'Project model' })
+export class Project implements Idea {
   @PrimaryGeneratedColumn()
   @Field(() => ID, { description: 'unique id of the project' })
   id: number;
