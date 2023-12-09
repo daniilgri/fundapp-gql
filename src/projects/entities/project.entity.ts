@@ -1,6 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
@@ -25,4 +26,7 @@ export class Project {
   @JoinTable()
   @ManyToMany(() => Tag, (tag) => tag.projects, { cascade: ['insert'] })
   tags?: Tag[];
+
+  @CreateDateColumn()
+  createdAt?: Date;
 }

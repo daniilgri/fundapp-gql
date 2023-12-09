@@ -7,6 +7,7 @@ import { join } from 'path';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CommonModule } from './common/common.module';
 import { ProjectsModule } from './projects/projects.module';
 import { configValidationSchema } from './schemas/config.schema';
 
@@ -38,6 +39,7 @@ import { configValidationSchema } from './schemas/config.schema';
       },
     }),
     ProjectsModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
