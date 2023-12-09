@@ -1,6 +1,8 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { MinLength } from 'class-validator';
 
+import { PROJECT_TYPE } from '../../common/enums/project-type.enum';
+
 @InputType()
 export class CreateProjectInput {
   @MinLength(2)
@@ -8,4 +10,6 @@ export class CreateProjectInput {
   name: string;
 
   tags: string[];
+
+  type: PROJECT_TYPE;
 }

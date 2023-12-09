@@ -8,7 +8,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CommonModule } from './common/common.module';
-import { Concept } from './concept/entities/concept.entity';
+import { Concept } from './concepts/entities/concept.entity';
 import { IdeasResolver } from './ideas/ideas.resolver';
 import { ProjectsModule } from './projects/projects.module';
 import { configValidationSchema } from './schemas/config.schema';

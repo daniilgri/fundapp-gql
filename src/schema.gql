@@ -2,11 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-interface Idea {
+type Concept implements Idea {
   name: String!
 }
 
-type Concept implements Idea {
+interface Idea {
   name: String!
 }
 
@@ -31,10 +31,12 @@ type Project implements Idea {
 scalar Date
 
 type Query {
-  ideas: [Idea!]!
+  ideas: [IdeasResult!]!
   projects: [Project!]!
   project(id: ID!): Project!
 }
+
+union IdeasResult = Project | Concept
 
 type Mutation {
   createProject(createProjectInput: CreateProjectInput!): Project!

@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
+import { PROJECT_TYPE } from '../../common/enums/project-type.enum';
 import { Idea } from '../../common/interfaces/idea.interface';
 import { Tag } from '../../tags/entities/tag.entity';
 
@@ -30,4 +31,7 @@ export class Project implements Idea {
 
   @CreateDateColumn()
   createdAt?: Date;
+
+  @Column({ nullable: true })
+  type?: PROJECT_TYPE;
 }
