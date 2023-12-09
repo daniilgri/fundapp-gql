@@ -1,5 +1,13 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
+import { Tag } from '../../tags/entities/tag.entity';
 
 @Entity()
 @ObjectType({ description: 'Project model' })
@@ -14,6 +22,7 @@ export class Project {
   @Column({ default: false })
   approved: boolean;
 
-  @Column({ type: 'json' })
-  tags: string[];
+  @JoinTable()
+  @ManyToMany(() => Tag, (tag) => tag.projects, { cascade: ['insert'] })
+  tags?: Tag[];
 }

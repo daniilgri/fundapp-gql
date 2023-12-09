@@ -18,9 +18,18 @@ type Query {
 
 type Mutation {
   createProject(createProjectInput: CreateProjectInput!): Project!
+  updateProject(id: ID!, updateProjectInput: UpdateProjectInput!): Project!
+  removeProject(id: ID!): Project!
 }
 
 input CreateProjectInput {
+  """Project name"""
   name: String!
   tags: [String!]!
+}
+
+input UpdateProjectInput {
+  """Project name"""
+  name: String
+  tags: [String!]
 }
