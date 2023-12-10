@@ -10,6 +10,7 @@ import {
 
 import { PROJECT_TYPE } from '../../common/enums/project-type.enum';
 import { Idea } from '../../common/interfaces/idea.interface';
+import { loggerMiddleware } from '../../common/middlewares/logger.middleware';
 import { Tag } from '../../tags/entities/tag.entity';
 
 @Entity()
@@ -20,6 +21,7 @@ export class Project implements Idea {
   id: number;
 
   @Column()
+  @Field({ middleware: [loggerMiddleware] })
   name: string;
 
   @Column({ default: false })
