@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserInputError } from 'apollo-server-express';
+import { PubSub } from 'graphql-subscriptions';
 import { Repository } from 'typeorm';
 
 import { PROJECT_NOT_FOUND } from './constants/error-messages.constant';
@@ -16,6 +17,7 @@ export class ProjectsService {
     private readonly projectsRepository: Repository<Project>,
     @InjectRepository(Tag)
     private readonly tagsRepository: Repository<Tag>,
+    private readonly pubSub: PubSub,
   ) {}
 
   async getAll(): Promise<Project[]> {
@@ -39,7 +41,10 @@ export class ProjectsService {
       tags,
     });
 
-    return this.projectsRepository.save(project);
+    const newProject = await this.projectsRepository.save(project);
+    this.pubSub.publish('projectAdded', { projectAdded: newProject });
+
+    return newProject;
   }
 
   async update(

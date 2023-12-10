@@ -1,5 +1,13 @@
 import { ParseIntPipe } from '@nestjs/common';
-import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  ID,
+  Mutation,
+  Query,
+  Resolver,
+  Subscription,
+} from '@nestjs/graphql';
+import { PubSub } from 'graphql-subscriptions';
 
 import { CreateProjectInput } from './dto/create-project.input';
 import { UpdateProjectInput } from './dto/update-project.input';
@@ -8,7 +16,10 @@ import { ProjectsService } from './projects.service';
 
 @Resolver()
 export class ProjectsResolver {
-  constructor(private readonly projectsService: ProjectsService) {}
+  constructor(
+    private readonly projectsService: ProjectsService,
+    private readonly pubSub: PubSub,
+  ) {}
 
   @Query(() => [Project], { name: 'projects' })
   async getAll(): Promise<Project[]> {
@@ -38,5 +49,10 @@ export class ProjectsResolver {
   @Mutation(() => Project, { name: 'removeProject' })
   async remove(@Args('id', { type: () => ID }, ParseIntPipe) id: number) {
     return this.projectsService.remove(id);
+  }
+
+  @Subscription(() => Project)
+  projectAdded() {
+    return this.pubSub.asyncIterator('projectAdded');
   }
 }

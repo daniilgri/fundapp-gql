@@ -6,10 +6,11 @@ import { ProjectTagsResolver } from './project-tags/project-tags.resolver';
 import { ProjectTagsService } from './project-tags/project-tags.service';
 import { ProjectsResolver } from './projects.resolver';
 import { ProjectsService } from './projects.service';
+import { PubSubModule } from '../pub-sub/pub-sub.module';
 import { Tag } from '../tags/entities/tag.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Project, Tag])],
+  imports: [TypeOrmModule.forFeature([Project, Tag]), PubSubModule],
   providers: [
     ProjectsResolver,
     ProjectsService,
